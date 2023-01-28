@@ -1,8 +1,52 @@
+@import "../Styles/_variables.scss";
+
 .header {
-  background-color: #7e2606;
+  background-color: $primary;
+  height: 5rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  padding-left: 10rem;
+  padding-right: 10rem;
 
   &__logo {
-    color: orange;
-    font-size: 5rem;
+    color: $color_white;
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+
+  &__cart {
+    color: $color_white;
+    background-color: $primary-dark-1;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 3rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    border: 2px solid transparent;
+    cursor: pointer;
+
+    &:hover {
+      border: 2px solid white;
+    }
+
+    &__title {
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
+
+      svg {
+        margin-right: 0.5rem;
+      }
+    }
+
+    &__product_amount {
+      background-color: $primary-light-1;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+    }
   }
 }
