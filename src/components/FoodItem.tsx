@@ -1,14 +1,23 @@
-import { Dispatch } from "react"
+import { Dispatch, useState } from "react"
 import styles from "./FoodItem.module.scss"
 
 import { FoodItemInterface } from "../Layout/FoodList"
 
 interface FoodItemProps extends FoodItemInterface {
-  addMealHandler: Dispatch<{ type: string; meal: FoodItemInterface }>
+  addMealHandler: Dispatch<{ type: string; meal: { id: string; addValue: number } }>
 }
 
-function FoodItem({ id, name, description, price, addMealHandler }: FoodItemProps) {
+function FoodItem({ id, name, description, price, amount, addMealHandler }: FoodItemProps) {
   // console.log(addMealHandler())
+
+  const [mealAmountCounter, setMealAmountCounter] = useState(1)
+
+  function handleMealAmountInput(e: React.FormEvent<HTMLInputElement>): void {
+    const value = parseInt(e.currentTarget.value)
+    if (value > 0) {
+      setMealAmountCounter(value)
+    }
+  }
 
   return (
     <div className={styles.foodItem}>
@@ -19,11 +28,19 @@ function FoodItem({ id, name, description, price, addMealHandler }: FoodItemProp
       </div>
       <div className={styles.foodItem__order_functionality}>
         <h5 className={styles.foodItem__order_functionality__amount}>Amount</h5>
-        <input type='number' className={styles.foodItem__order_functionality__count} />
+        <input
+          type='number'
+          className={styles.foodItem__order_functionality__count}
+          value={mealAmountCounter}
+          onChange={handleMealAmountInput}
+        />
         <div className={styles.foodItem__order_functionality__button}>
           <button
             onClick={() =>
-              addMealHandler({ type: "add-meal", meal: { id, name, description, price } })
+              addMealHandler({
+                type: "add-meal",
+                meal: { id, addValue: mealAmountCounter },
+              })
             }
           >
             + Add

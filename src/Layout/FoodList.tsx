@@ -13,32 +13,16 @@ export interface FoodItemInterface {
 }
 
 function FoodList() {
-  const [meals, dispatchMeals] = useReducer(
-    (
-      state: FoodItemInterface[],
-      action: { type: string; meal: FoodItemInterface }
-    ): FoodItemInterface[] => {
-      if (action.type === "add-meal") {
-        if (state.find((el) => el.id === action.meal.id)) {
-          console.log("Meal exist.")
-          return [
-            ...state.map((el) => {
-              return { ...el, amount: el.amount ? el.amount++ : 0 }
-            }),
-          ]
-        }
-        return [...state, { ...action.meal, amount: 1 }]
-      }
-
-      return state
-    },
-    []
-  )
+  const [meals, dispatchMeals] = useReducer(foodListReducer, [
+    ...mealsData.map((meal) => {
+      return { ...meal, amount: 0 }
+    }),
+  ])
 
   return (
     <div className={styles.foodList}>
       <div className={styles.foodList__container}>
-        {mealsData.map((meal) => (
+        {meals.map((meal) => (
           <FoodItem
             key={meal.id}
             id={meal.id}
@@ -46,6 +30,7 @@ function FoodList() {
             description={meal.description}
             price={meal.price}
             addMealHandler={dispatchMeals}
+            amount={meal.amount}
           />
         ))}
       </div>
@@ -54,3 +39,28 @@ function FoodList() {
 }
 
 export default FoodList
+
+function foodListReducer(
+  state: FoodItemInterface[],
+  action: { type: string; meal: { id: string; addValue: number } }
+): FoodItemInterface[] {
+  // Adding meal
+
+  if (action.type === "add-meal") {
+    return [
+      ...state.map((el) => {
+        if (el.id === action.meal.id) {
+          console.log(action.meal.addValue, el.id)
+          return {
+            ...el,
+            amount: el.amount ? el.amount + action.meal.addValue : action.meal.addValue,
+          }
+        } else {
+          return el
+        }
+      }),
+    ]
+  }
+
+  return state
+}
