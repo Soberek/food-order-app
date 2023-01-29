@@ -1,0 +1,14 @@
+@import "../Styles/variables";
+
+.foodList {
+  background-color: black;
+  padding-bottom: 2rem;
+
+  &__container {
+    background-color: $color_white;
+    max-width: 60rem;
+    margin: 0 auto;
+
+    border-radius: $border-radius-small;
+  }
+}

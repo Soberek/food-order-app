@@ -1,14 +1,14 @@
 import "./App.css"
 import Header from "./Layout/Header"
 import Main from "./Layout/Main"
-import Footer from "./Layout/Footer"
+import FoodList from "./Layout/FoodList"
 
 function App() {
   return (
     <div className='App'>
       <Header />
       <Main />
-      <Footer />
+      <FoodList />
     </div>
   )
 }

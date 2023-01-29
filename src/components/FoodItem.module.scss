@@ -1,0 +1,72 @@
+@import "../Styles/variables";
+.foodItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+
+  &__description {
+    text-align: start;
+
+    & > *:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+
+    &__title {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    &__dummy_text {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: $primary-gray-1;
+    }
+
+    &__price {
+      color: $primary;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+  }
+
+  &__order_functionality {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    &__amount {
+      flex: 0 0 30%;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    &__count {
+      width: 15%;
+      margin-bottom: 0.5rem;
+    }
+
+    &__button {
+      flex: 0 0 100%;
+      display: flex;
+      justify-content: end;
+
+      button {
+        padding: 0.5rem 2rem;
+        border: none;
+        border-radius: $border-radius-medium;
+        color: white;
+        background-color: $primary;
+        font-weight: 600;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: all 0.1s;
+
+        &:hover {
+          background-color: white;
+          border: 1px solid $primary;
+          color: $primary;
+        }
+      }
+    }
+  }
+}
