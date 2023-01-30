@@ -3,7 +3,7 @@ import Header from "./Layout/Header"
 import Main from "./Layout/Main"
 import FoodList from "./Layout/FoodList"
 
-// Test only
+// Provider
 import { FoodListProvider } from "./store/FoodListProvider"
 
 function App() {
