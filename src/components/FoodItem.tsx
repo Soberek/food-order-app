@@ -1,13 +1,15 @@
 import { Dispatch, useState } from "react"
 import styles from "./FoodItem.module.scss"
 
-import { FoodItemInterface } from "../Layout/FoodList"
+// Types
+import { IFoodItemInterface } from "../store/FoodListProvider"
+import { handleMealsChangeType } from "../store/FoodListProvider"
 
-interface FoodItemProps extends FoodItemInterface {
-  addMealHandler: Dispatch<{ type: string; meal: { id: string; addValue: number } }>
+interface FoodItemProps extends IFoodItemInterface {
+  handleMealsChange: ({}: handleMealsChangeType) => void
 }
 
-function FoodItem({ id, name, description, price, amount, addMealHandler }: FoodItemProps) {
+function FoodItem({ id, name, description, price, amount, handleMealsChange }: FoodItemProps) {
   // console.log(addMealHandler())
 
   const [mealAmountCounter, setMealAmountCounter] = useState(1)
@@ -37,7 +39,7 @@ function FoodItem({ id, name, description, price, amount, addMealHandler }: Food
         <div className={styles.foodItem__order_functionality__button}>
           <button
             onClick={() =>
-              addMealHandler({
+              handleMealsChange({
                 type: "add-meal",
                 meal: { id, addValue: mealAmountCounter },
               })
